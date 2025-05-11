@@ -1,0 +1,86 @@
+<div class="card">
+    <div class="card_header">
+        <p>Inserisci i dati preliminari</p>
+    </div>
+
+    <div class="body_card">
+        <form [formGroup]="emailForm">
+            <!-- Campo oggetto -->
+            <div class="form_group">
+                <label for="subject">Oggetto:</label>
+                <input 
+                    type="text" 
+                    id="subject"
+                    formControlName="subject"
+                    placeholder="Inserisci l'oggetto">
+            </div>
+
+            <!-- Campo Tipo Email -->
+            <div class="form_group">
+                <label for="emailType">Tipo Email:</label>
+                <select 
+                    name="emailType" 
+                    id="emailType"
+                    formControlName="typeEmail">
+                    <option disabled>Seleziona un tipo</option>
+                    @for(email of emailTypes;track email){
+                    <option [value]="email">{{email}}</option>
+                    }
+                </select>
+            </div>
+
+            <!--- Selezione servizio--->
+            <div class="form_group">
+                <label for="service">Servizio:</label>
+                <select 
+                    name="serviceTypes" 
+                    id="service" 
+                    formControlName="service">
+                    <option value="" disabled>Seleziona un servizio</option>
+                    @for(service of serviceTypes;track service){
+                    <option [value]="service">{{service}}</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Tabella servizi aggiunti-->
+
+            @if(addedServices.length>0){
+                <div class="services_added">
+                   <h4>Servizi selezionati:</h4>
+                   <ul>
+                    @for(service of addedServices; track service){
+                        <li>
+                            {{service}}
+                            <button 
+                                type="button" 
+                                class="remove_btn"
+                                (click)="removeService(service)" >
+                                x
+                            </button>
+                        </li>
+                    }
+                   </ul>
+                </div>
+            }
+
+            <!--Buttons-->
+            <div class="buttons">
+                <button 
+                    type="button"   
+                    class="btn_server"
+                    (click)="addService()"
+                    [disabled]="!emailForm.get('service')?.value">
+                    Aggiungi un servizio
+                </button>
+                <button 
+                    type="button" 
+                    class="btn_success"
+                    (click)="saveAndProceed()"
+                    [disabled]="!emailForm.valid || addedServices.length === 0">
+                    Salva e prosegui
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

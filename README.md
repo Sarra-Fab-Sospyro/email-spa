@@ -1,3 +1,4 @@
+
 # MailFlow
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.8.
@@ -11,6 +12,19 @@ ng serve
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+
+### Running with Mock Server
+
+If you want to run both the Angular app and the mock server simultaneously, use the following command:
+
+```bash
+npm run start:mock
+```
+
+This will run both:
+
+- The Angular development server (`ng serve`) on `http://localhost:4200/`
+- The mock Express server (using `nodemon`) on `http://localhost:3000/`
 
 ## Code scaffolding
 
